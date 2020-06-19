@@ -2,6 +2,7 @@ package apitask
 
 import "github.com/francoispqt/gojay"
 
+// TaskMeta represents a minimal representation of a task.
 type TaskMeta struct {
 	Id   uint64
 	Name string
@@ -18,7 +19,7 @@ func (s *TaskMeta) UnmarshalJSONObject(d *gojay.Decoder, k string) error {
 }
 
 func (s *TaskMeta) NKeys() int {
-	panic("implement me")
+	return 2
 }
 
 func (s *TaskMeta) MarshalJSONObject(enc *gojay.Encoder) {

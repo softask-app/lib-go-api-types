@@ -6,7 +6,6 @@ import (
 
 	"github.com/francoispqt/gojay"
 
-	"github.com/softask-app/lib-go-api-types/v1/pkg/apistep"
 	"github.com/softask-app/lib-go-api-types/v1/pkg/apiuser"
 )
 
@@ -19,13 +18,14 @@ const (
 	JsKeyTaskUpdated     = "updated"
 )
 
+// TaskDetails represents a "full" task object.
 type TaskDetails struct {
 	TaskMeta
 
 	Description string
 	Creator     apiuser.UserMeta
 	Assignees   apiuser.UserList
-	Steps       apistep.StepList
+	Steps       StepList
 	Created     time.Time
 	Updated     time.Time
 }
@@ -59,6 +59,12 @@ func (s *TaskDetails) NKeys() int {
 func (s *TaskDetails) MarshalJSONObject(enc *gojay.Encoder) {
 	enc.AddUint64Key(JsKeyTaskId, s.Id)
 	enc.AddStringKey(JsKeyTaskName, s.Name)
+	enc.AddStringKey(JsKeyTaskDescription, s.Description)
+	enc.AddObjectKey(JsKeyTaskCreator, &s.Creator)
+	enc.AddArrayKeyOmitEmpty(JsKeyTaskAssignees, s.Assignees)
+	enc.AddArrayKeyOmitEmpty(JsKeyTaskSteps, s.Steps)
+	enc.AddTimeKey(JsKeyTaskCreated, &s.Created, time.RFC3339Nano)
+	enc.AddTimeKey(JsKeyTaskUpdated, &s.Updated, time.RFC3339Nano)
 }
 
 func (s TaskDetails) IsNil() bool {
