@@ -17,3 +17,10 @@ func TestStepCreateRequest_NKeys(t *testing.T) {
 		convey.So(tmp.NKeys(), convey.ShouldEqual, kind.NumField())
 	})
 }
+
+func TestStepCreateRequest_IsNil(t *testing.T) {
+	convey.Convey("StepCreateRequest.IsNil", t, func() {
+		tmp := apitype.StepCreateRequest{}
+		convey.So(tmp.IsNil(), convey.ShouldBeFalse)
+	})
+}

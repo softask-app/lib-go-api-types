@@ -12,3 +12,10 @@ func TestTaskDetails_NKeys(t *testing.T) {
 		convey.So(tmp.NKeys(), convey.ShouldEqual, fieldCount(tmp))
 	})
 }
+
+func TestTaskDetails_IsNil(t *testing.T) {
+	convey.Convey("TaskDetails.IsNil", t, func() {
+		tmp := apitype.TaskDetails{}
+		convey.So(tmp.IsNil(), convey.ShouldBeFalse)
+	})
+}

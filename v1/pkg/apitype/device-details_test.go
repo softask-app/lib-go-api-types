@@ -17,3 +17,10 @@ func TestDeviceDetails_NKeys(t *testing.T) {
 		convey.So(tmp.NKeys(), convey.ShouldEqual, kind.NumField())
 	})
 }
+
+func TestDeviceDetails_IsNil(t *testing.T) {
+	convey.Convey("DeviceDetails.IsNil", t, func() {
+		tmp := apitype.DeviceDetails{}
+		convey.So(tmp.IsNil(), convey.ShouldBeFalse)
+	})
+}

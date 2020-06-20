@@ -15,3 +15,10 @@ func TestStepMeta_NKeys(t *testing.T) {
 		convey.So(tmp.NKeys(), convey.ShouldEqual, kind.NumField())
 	})
 }
+
+func TestStepMeta_IsNil(t *testing.T) {
+	convey.Convey("StepMeta.IsNil", t, func() {
+		tmp := apitype.StepMeta{}
+		convey.So(tmp.IsNil(), convey.ShouldBeFalse)
+	})
+}

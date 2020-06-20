@@ -15,3 +15,10 @@ func TestTaskCreateRequest_NKeys(t *testing.T) {
 		convey.So(tmp.NKeys(), convey.ShouldEqual, kind.NumField())
 	})
 }
+
+func TestTaskCreateRequest_IsNil(t *testing.T) {
+	convey.Convey("TaskCreateRequest.IsNil", t, func() {
+		tmp := apitype.TaskCreateRequest{}
+		convey.So(tmp.IsNil(), convey.ShouldBeFalse)
+	})
+}

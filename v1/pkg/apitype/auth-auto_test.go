@@ -49,3 +49,10 @@ func TestAutoAuth_NKeys(t *testing.T) {
 		So(tmp.NKeys(), ShouldEqual, kind.NumField())
 	})
 }
+
+func TestAutoAuth_IsNil(t *testing.T) {
+	Convey("AutoAuth.IsNil", t, func() {
+		tmp := apitype.AutoAuth{}
+		So(tmp.IsNil(), ShouldBeFalse)
+	})
+}

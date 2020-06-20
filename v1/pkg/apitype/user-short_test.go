@@ -12,3 +12,10 @@ func TestUserMeta_NKeys(t *testing.T) {
 		convey.So(tmp.NKeys(), convey.ShouldEqual, fieldCount(tmp))
 	})
 }
+
+func TestUserMeta_IsNil(t *testing.T) {
+	convey.Convey("UserMeta.IsNil", t, func() {
+		tmp := apitype.UserMeta{}
+		convey.So(tmp.IsNil(), convey.ShouldBeFalse)
+	})
+}

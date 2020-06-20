@@ -15,3 +15,10 @@ func TestTaskMeta_NKeys(t *testing.T) {
 		convey.So(tmp.NKeys(), convey.ShouldEqual, kind.NumField())
 	})
 }
+
+func TestTaskMeta_IsNil(t *testing.T) {
+	convey.Convey("TaskMeta.IsNil", t, func() {
+		tmp := apitype.TaskMeta{}
+		convey.So(tmp.IsNil(), convey.ShouldBeFalse)
+	})
+}

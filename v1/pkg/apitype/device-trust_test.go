@@ -17,3 +17,10 @@ func TestDeviceTrustResponse_NKeys(t *testing.T) {
 		convey.So(tmp.NKeys(), convey.ShouldEqual, kind.NumField())
 	})
 }
+
+func TestDeviceTrustResponse_IsNil(t *testing.T) {
+	convey.Convey("DeviceTrustResponse.IsNil", t, func() {
+		tmp := apitype.DeviceTrustResponse{}
+		convey.So(tmp.IsNil(), convey.ShouldBeFalse)
+	})
+}

@@ -15,3 +15,10 @@ func TestUserCreateRequest_NKeys(t *testing.T) {
 		convey.So(tmp.NKeys(), convey.ShouldEqual, kind.NumField())
 	})
 }
+
+func TestUserCreateRequest_IsNil(t *testing.T) {
+	convey.Convey("UserCreateRequest.IsNil", t, func() {
+		tmp := apitype.UserCreateRequest{}
+		convey.So(tmp.IsNil(), convey.ShouldBeFalse)
+	})
+}

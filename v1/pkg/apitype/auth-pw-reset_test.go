@@ -26,3 +26,17 @@ func TestRequestPasswordResetRequest_NKeys(t *testing.T) {
 		convey.So(tmp.NKeys(), convey.ShouldEqual, kind.NumField())
 	})
 }
+
+func TestPasswordResetRequest_IsNil(t *testing.T) {
+	convey.Convey("PasswordResetRequest.IsNil", t, func() {
+		tmp := apitype.PasswordResetRequest{}
+		convey.So(tmp.IsNil(), convey.ShouldBeFalse)
+	})
+}
+
+func TestRequestPasswordResetRequest_IsNil(t *testing.T) {
+	convey.Convey("RequestPasswordResetRequest.IsNil", t, func() {
+		tmp := apitype.RequestPasswordResetRequest{}
+		convey.So(tmp.IsNil(), convey.ShouldBeFalse)
+	})
+}

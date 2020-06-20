@@ -17,3 +17,10 @@ func TestLoginRequest_NKeys(t *testing.T) {
 		So(tmp.NKeys(), ShouldEqual, kind.NumField())
 	})
 }
+
+func TestLoginRequest_IsNil(t *testing.T) {
+	Convey("LoginRequest.IsNil", t, func() {
+		tmp := apitype.LoginRequest{}
+		So(tmp.IsNil(), ShouldBeFalse)
+	})
+}

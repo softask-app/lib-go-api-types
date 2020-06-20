@@ -15,3 +15,10 @@ func TestStepDetails_NKeys(t *testing.T) {
 		convey.So(tmp.NKeys(), convey.ShouldEqual, kind.NumField())
 	})
 }
+
+func TestStepDetails_IsNil(t *testing.T) {
+	convey.Convey("StepDetails.IsNil", t, func() {
+		tmp := apitype.StepDetails{}
+		convey.So(tmp.IsNil(), convey.ShouldBeFalse)
+	})
+}

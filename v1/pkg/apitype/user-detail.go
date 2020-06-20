@@ -6,8 +6,8 @@ import (
 	"github.com/francoispqt/gojay"
 )
 
-// UserDetail defines the info available for a specific user record.
-type UserDetail struct {
+// UserDetails defines the info available for a specific user record.
+type UserDetails struct {
 	UserMeta
 
 	Email     string
@@ -17,7 +17,7 @@ type UserDetail struct {
 }
 
 // MarshalJSONObject implements the gojay MarshalerJSONObject interface.
-func (u UserDetail) MarshalJSONObject(e *gojay.Encoder) {
+func (u UserDetails) MarshalJSONObject(e *gojay.Encoder) {
 	u.UserMeta.MarshalJSONObject(e)
 	e.StringKey(JsKeyEmail, u.Email)
 	e.ArrayKeyOmitEmpty(JsKeyProviders, u.Providers)
@@ -26,7 +26,7 @@ func (u UserDetail) MarshalJSONObject(e *gojay.Encoder) {
 }
 
 // UnmarshalJSONObject implements the gojay UnmarshalerJSONObject interface.
-func (u *UserDetail) UnmarshalJSONObject(d *gojay.Decoder, s string) error {
+func (u *UserDetails) UnmarshalJSONObject(d *gojay.Decoder, s string) error {
 	switch s {
 	case JsKeyEmail:
 		return d.String(&u.Email)
@@ -42,11 +42,11 @@ func (u *UserDetail) UnmarshalJSONObject(d *gojay.Decoder, s string) error {
 }
 
 // NKeys implements the gojay UnmarshalerJSONObject interface.
-func (u *UserDetail) NKeys() int {
+func (u *UserDetails) NKeys() int {
 	return 4 + u.UserMeta.NKeys()
 }
 
 // IsNil implements the gojay MarshalerJSONObject interface.
-func (u UserDetail) IsNil() bool {
+func (u UserDetails) IsNil() bool {
 	return false
 }

@@ -7,8 +7,15 @@ import (
 )
 
 func TestUserDetail_NKeys(t *testing.T) {
-	convey.Convey("UserDetail.NKeys", t, func() {
-		tmp := apitype.UserDetail{}
+	convey.Convey("UserDetails.NKeys", t, func() {
+		tmp := apitype.UserDetails{}
 		convey.So(tmp.NKeys(), convey.ShouldEqual, fieldCount(tmp))
+	})
+}
+
+func TestUserDetail_IsNil(t *testing.T) {
+	convey.Convey("UserDetails.IsNil", t, func() {
+		tmp := apitype.UserDetails{}
+		convey.So(tmp.IsNil(), convey.ShouldBeFalse)
 	})
 }

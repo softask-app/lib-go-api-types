@@ -17,3 +17,10 @@ func TestAuthResponse_NKeys(t *testing.T) {
 		convey.So(tmp.NKeys(), convey.ShouldEqual, kind.NumField())
 	})
 }
+
+func TestAuthResponse_IsNil(t *testing.T) {
+	convey.Convey("AuthResponse.IsNil", t, func() {
+		tmp := apitype.AuthResponse{}
+		convey.So(tmp.IsNil(), convey.ShouldBeFalse)
+	})
+}
