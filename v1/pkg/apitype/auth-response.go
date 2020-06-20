@@ -15,6 +15,7 @@ type AuthResponse struct {
 	ApiKey apitoken.Token128
 }
 
+// MarshalJSONObject implements the gojay MarshalerJSONObject interface.
 func (a AuthResponse) MarshalJSONObject(enc *gojay.Encoder) {
 	enc.StringKey(JsApiKey, a.ApiKey.String())
 }

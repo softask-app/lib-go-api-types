@@ -26,6 +26,7 @@ type AutoAuth struct {
 	Token apitoken.Token256
 }
 
+// MarshalJSONObject implements the gojay MarshalerJSONObject interface.
 func (a *AutoAuth) MarshalJSONObject(e *gojay.Encoder) {
 	e.Uint64Key(JsKeyUserId, a.UserId)
 	e.ArrayKey(JsKeyDeviceId, a.DeviceId)

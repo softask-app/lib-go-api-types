@@ -1,7 +1,6 @@
 package apitype
 
 import (
-	"errors"
 	"time"
 
 	"github.com/francoispqt/gojay"
@@ -16,6 +15,21 @@ type StepDetails struct {
 	Created     time.Time
 	Updated     time.Time
 	Deleted     *time.Time
+}
+
+// MarshalJSONObject implements the gojay MarshalerJSONObject interface.
+func (s StepDetails) MarshalJSONObject(e *gojay.Encoder) {
+	e.Uint64Key(JsKeyId, s.Id)
+	e.ObjectKey(JsKeyTask, &s.Task)
+	e.StringKey(JsKeyDescription, s.Description)
+	e.Uint16Key(JsKeyPosition, s.Position)
+	e.ObjectKey(JsKeyCreator, &s.Creator)
+	e.TimeKey(JsKeyCreated, &s.Created, time.RFC3339Nano)
+	e.TimeKey(JsKeyUpdated, &s.Updated, time.RFC3339Nano)
+
+	if s.Deleted != nil {
+		e.TimeKey(JsKeyDeleted, s.Deleted, time.RFC3339Nano)
+	}
 }
 
 func (s *StepDetails) UnmarshalJSONObject(d *gojay.Decoder, k string) error {
@@ -43,20 +57,6 @@ func (s *StepDetails) UnmarshalJSONObject(d *gojay.Decoder, k string) error {
 
 func (*StepDetails) NKeys() int {
 	return 8
-}
-
-func (s StepDetails) MarshalJSONObject(e *gojay.Encoder) {
-	e.Uint64Key(JsKeyId, s.Id)
-	e.ObjectKey(JsKeyTask, &s.Task)
-	e.StringKey(JsKeyDescription, s.Description)
-	e.Uint16Key(JsKeyPosition, s.Position)
-	e.ObjectKey(JsKeyCreator, &s.Creator)
-	e.TimeKey(JsKeyCreated, &s.Created, time.RFC3339Nano)
-	e.TimeKey(JsKeyUpdated, &s.Updated, time.RFC3339Nano)
-
-	if s.Deleted != nil {
-		e.TimeKey(JsKeyDeleted, s.Deleted, time.RFC3339Nano)
-	}
 }
 
 func (s StepDetails) IsNil() bool {

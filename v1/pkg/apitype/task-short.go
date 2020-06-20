@@ -8,6 +8,12 @@ type TaskMeta struct {
 	Name string
 }
 
+// MarshalJSONObject implements the gojay MarshalerJSONObject interface.
+func (s *TaskMeta) MarshalJSONObject(enc *gojay.Encoder) {
+	enc.AddUint64Key(JsKeyTaskId, s.Id)
+	enc.AddStringKey(JsKeyName, s.Name)
+}
+
 func (s *TaskMeta) UnmarshalJSONObject(d *gojay.Decoder, k string) error {
 	switch k {
 	case JsKeyTaskId:
@@ -21,11 +27,6 @@ func (s *TaskMeta) UnmarshalJSONObject(d *gojay.Decoder, k string) error {
 
 func (s *TaskMeta) NKeys() int {
 	return 2
-}
-
-func (s *TaskMeta) MarshalJSONObject(enc *gojay.Encoder) {
-	enc.AddUint64Key(JsKeyTaskId, s.Id)
-	enc.AddStringKey(JsKeyName, s.Name)
 }
 
 func (s TaskMeta) IsNil() bool {

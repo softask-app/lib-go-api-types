@@ -6,6 +6,12 @@ import (
 
 type StepList []StepMeta
 
+func (s StepList) MarshalJSONArray(e *gojay.Encoder) {
+	for i := range s {
+		e.AddObject(&s[i])
+	}
+}
+
 func (s *StepList) UnmarshalJSONArray(d *gojay.Decoder) error {
 	var tmp StepMeta
 	if err := d.Object(&tmp); err != nil {
@@ -15,12 +21,6 @@ func (s *StepList) UnmarshalJSONArray(d *gojay.Decoder) error {
 	*s = append(*s, tmp)
 
 	return nil
-}
-
-func (s StepList) MarshalJSONArray(e *gojay.Encoder) {
-	for i := range s {
-		e.AddObject(&s[i])
-	}
 }
 
 func (s StepList) IsNil() bool {

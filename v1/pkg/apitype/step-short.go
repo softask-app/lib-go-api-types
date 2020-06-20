@@ -11,6 +11,14 @@ type StepMeta struct {
 	Position    uint16
 }
 
+// MarshalJSONObject implements the gojay MarshalerJSONObject interface.
+func (s StepMeta) MarshalJSONObject(e *gojay.Encoder) {
+	e.Uint64Key(JsKeyId, s.Id)
+	e.Uint64Key(JsKeyTaskId, s.TaskId)
+	e.StringKey(JsKeyDescription, s.Description)
+	e.Uint16Key(JsKeyPosition, s.Position)
+}
+
 func (s *StepMeta) UnmarshalJSONObject(d *gojay.Decoder, k string) error {
 	switch k {
 	case JsKeyId:
@@ -28,13 +36,6 @@ func (s *StepMeta) UnmarshalJSONObject(d *gojay.Decoder, k string) error {
 
 func (s *StepMeta) NKeys() int {
 	return 4
-}
-
-func (s StepMeta) MarshalJSONObject(e *gojay.Encoder) {
-	e.Uint64Key(JsKeyId, s.Id)
-	e.Uint64Key(JsKeyTaskId, s.TaskId)
-	e.StringKey(JsKeyDescription, s.Description)
-	e.Uint16Key(JsKeyPosition, s.Position)
 }
 
 func (s StepMeta) IsNil() bool {

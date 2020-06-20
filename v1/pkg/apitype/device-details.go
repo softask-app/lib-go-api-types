@@ -32,6 +32,20 @@ type DeviceDetails struct {
 	Trusted *DeviceTrust
 }
 
+// MarshalJSONObject implements the gojay MarshalerJSONObject interface.
+func (d *DeviceDetails) MarshalJSONObject(e *gojay.Encoder) {
+	e.Uint64Key(JsKeyId, d.Id)
+	e.StringKey(JsKeyDeviceId, d.DeviceId.String())
+	e.StringKey(JsKeyDeviceName, d.DeviceName)
+	if len(d.DisplayName) > 0 {
+		e.StringKey(JsKeyDisplayName, d.DisplayName)
+	}
+	e.TimeKey(JsKeyLastLogin, &d.LastLogin, time.RFC3339Nano)
+	if d.Trusted != nil {
+		e.ObjectKey(JsKeyTrusted, d.Trusted)
+	}
+}
+
 func (d *DeviceDetails) UnmarshalJSONObject(e *gojay.Decoder, k string) error {
 	switch k {
 	case JsKeyId:
@@ -52,20 +66,7 @@ func (d *DeviceDetails) UnmarshalJSONObject(e *gojay.Decoder, k string) error {
 }
 
 func (d *DeviceDetails) NKeys() int {
-	panic("implement me")
-}
-
-func (d *DeviceDetails) MarshalJSONObject(e *gojay.Encoder) {
-	e.Uint64Key(JsKeyId, d.Id)
-	e.StringKey(JsKeyDeviceId, d.DeviceId.String())
-	e.StringKey(JsKeyDeviceName, d.DeviceName)
-	if len(d.DisplayName) > 0 {
-		e.StringKey(JsKeyDisplayName, d.DisplayName)
-	}
-	e.TimeKey(JsKeyLastLogin, &d.LastLogin, time.RFC3339Nano)
-	if d.Trusted != nil {
-		e.ObjectKey(JsKeyTrusted, d.Trusted)
-	}
+	return 6
 }
 
 func (d *DeviceDetails) IsNil() bool {
@@ -74,6 +75,11 @@ func (d *DeviceDetails) IsNil() bool {
 
 type DeviceTrust struct {
 	Since time.Time
+}
+
+// MarshalJSONObject implements the gojay MarshalerJSONObject interface.
+func (d *DeviceTrust) MarshalJSONObject(e *gojay.Encoder) {
+	e.TimeKey(JsKeySince, &d.Since, time.RFC3339Nano)
 }
 
 func (d *DeviceTrust) UnmarshalJSONObject(e *gojay.Decoder, s string) error {
@@ -86,10 +92,6 @@ func (d *DeviceTrust) UnmarshalJSONObject(e *gojay.Decoder, s string) error {
 
 func (d *DeviceTrust) NKeys() int {
 	return 1
-}
-
-func (d *DeviceTrust) MarshalJSONObject(e *gojay.Encoder) {
-	e.TimeKey(JsKeySince, &d.Since, time.RFC3339Nano)
 }
 
 func (d *DeviceTrust) IsNil() bool {

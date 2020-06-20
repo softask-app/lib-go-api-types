@@ -14,6 +14,15 @@ type UserDetail struct {
 	Created   time.Time
 }
 
+// MarshalJSONObject implements the gojay MarshalerJSONObject interface.
+func (u UserDetail) MarshalJSONObject(e *gojay.Encoder) {
+	u.UserMeta.MarshalJSONObject(e)
+	e.StringKey(JsKeyEmail, u.Email)
+	e.ArrayKeyOmitEmpty(JsKeyProviders, u.Providers)
+	e.ArrayKeyOmitEmpty(JsKeySupports, u.Supports)
+	e.TimeKey(JsKeyCreated, &u.Created, time.RFC3339Nano)
+}
+
 func (u *UserDetail) UnmarshalJSONObject(d *gojay.Decoder, s string) error {
 	switch s {
 	case JsKeyEmail:
@@ -31,14 +40,6 @@ func (u *UserDetail) UnmarshalJSONObject(d *gojay.Decoder, s string) error {
 
 func (u *UserDetail) NKeys() int {
 	return 4 + u.UserMeta.NKeys()
-}
-
-func (u UserDetail) MarshalJSONObject(e *gojay.Encoder) {
-	u.UserMeta.MarshalJSONObject(e)
-	e.StringKey(JsKeyEmail, u.Email)
-	e.ArrayKeyOmitEmpty(JsKeyProviders, u.Providers)
-	e.ArrayKeyOmitEmpty(JsKeySupports, u.Supports)
-	e.TimeKey(JsKeyCreated, &u.Created, time.RFC3339Nano)
 }
 
 func (u UserDetail) IsNil() bool {

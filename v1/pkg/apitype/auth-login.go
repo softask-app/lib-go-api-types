@@ -5,13 +5,18 @@ import (
 )
 
 const (
-	JsKeyEmail    = "email"
 	JsKeyPassword = "password"
 )
 
 type LoginRequest struct {
 	Email    string
 	Password string
+}
+
+// MarshalJSONObject implements the gojay MarshalerJSONObject interface.
+func (l *LoginRequest) MarshalJSONObject(enc *gojay.Encoder) {
+	enc.StringKey(JsKeyEmail, l.Email)
+	enc.StringKey(JsKeyPassword, l.Password)
 }
 
 func (l *LoginRequest) UnmarshalJSONObject(dec *gojay.Decoder, s string) error {
@@ -26,6 +31,10 @@ func (l *LoginRequest) UnmarshalJSONObject(dec *gojay.Decoder, s string) error {
 	}
 
 	return nil
+}
+
+func (l *LoginRequest) IsNil() bool {
+	return false
 }
 
 func (l *LoginRequest) NKeys() int {
