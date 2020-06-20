@@ -29,10 +29,12 @@ func (a *AuthResponse) UnmarshalJSONObject(dec *gojay.Decoder, s string) error {
 	return nil
 }
 
+// IsNil implements the gojay MarshalerJSONObject interface.
 func (a AuthResponse) IsNil() bool {
 	return false
 }
 
+// NKeys implements the gojay UnmarshalerJSONObject interface.
 func (a *AuthResponse) NKeys() int {
 	return 1
 }

@@ -35,10 +35,12 @@ func (s *StepMeta) UnmarshalJSONObject(d *gojay.Decoder, k string) error {
 	return errBadKey(k)
 }
 
+// NKeys implements the gojay UnmarshalerJSONObject interface.
 func (s *StepMeta) NKeys() int {
 	return 4
 }
 
+// IsNil implements the gojay MarshalerJSONObject interface.
 func (s StepMeta) IsNil() bool {
 	return false
 }

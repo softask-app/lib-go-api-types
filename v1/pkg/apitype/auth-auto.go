@@ -47,10 +47,12 @@ func (a *AutoAuth) UnmarshalJSONObject(dec *gojay.Decoder, s string) (err error)
 	return errors.New("unrecognized ")
 }
 
+// IsNil implements the gojay MarshalerJSONObject interface.
 func (a *AutoAuth) IsNil() bool {
 	return false
 }
 
+// NKeys implements the gojay UnmarshalerJSONObject interface.
 func (a AutoAuth) NKeys() int {
 	return 3
 }

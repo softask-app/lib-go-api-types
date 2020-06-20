@@ -91,10 +91,12 @@ func (d *DeviceTrust) UnmarshalJSONObject(e *gojay.Decoder, s string) error {
 	return e.Time(&d.Since, time.RFC3339Nano)
 }
 
+// NKeys implements the gojay UnmarshalerJSONObject interface.
 func (d *DeviceTrust) NKeys() int {
 	return 1
 }
 
+// IsNil implements the gojay MarshalerJSONObject interface.
 func (d *DeviceTrust) IsNil() bool {
 	return false
 }

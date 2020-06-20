@@ -27,10 +27,12 @@ func (u *UserMeta) UnmarshalJSONObject(d *gojay.Decoder, s string) error {
 	return errBadKey(s)
 }
 
+// NKeys implements the gojay UnmarshalerJSONObject interface.
 func (u *UserMeta) NKeys() int {
 	return 2
 }
 
+// IsNil implements the gojay MarshalerJSONObject interface.
 func (u UserMeta) IsNil() bool {
 	return false
 }

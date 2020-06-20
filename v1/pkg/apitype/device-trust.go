@@ -23,10 +23,12 @@ func (t *DeviceTrustResponse) UnmarshalJSONObject(d *gojay.Decoder, s string) er
 	return d.Array(t.Token)
 }
 
+// NKeys implements the gojay UnmarshalerJSONObject interface.
 func (t *DeviceTrustResponse) NKeys() int {
 	return 1
 }
 
+// IsNil implements the gojay MarshalerJSONObject interface.
 func (t DeviceTrustResponse) IsNil() bool {
 	return false
 }

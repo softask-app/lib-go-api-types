@@ -57,10 +57,12 @@ func (r *RequestPasswordRequest) UnmarshalJSONObject(d *gojay.Decoder, s string)
 	return nil
 }
 
-func (r *RequestPasswordRequest) IsNil() bool {
-	return false
-}
-
+// NKeys implements the gojay UnmarshalerJSONObject interface.
 func (r *RequestPasswordRequest) NKeys() int {
 	return 1
+}
+
+// IsNil implements the gojay MarshalerJSONObject interface.
+func (r *RequestPasswordRequest) IsNil() bool {
+	return false
 }

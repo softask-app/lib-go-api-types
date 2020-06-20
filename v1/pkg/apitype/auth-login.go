@@ -34,10 +34,12 @@ func (l *LoginRequest) UnmarshalJSONObject(dec *gojay.Decoder, s string) error {
 	return nil
 }
 
+// IsNil implements the gojay MarshalerJSONObject interface.
 func (l *LoginRequest) IsNil() bool {
 	return false
 }
 
+// NKeys implements the gojay UnmarshalerJSONObject interface.
 func (l *LoginRequest) NKeys() int {
 	return 2
 }

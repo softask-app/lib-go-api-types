@@ -57,10 +57,12 @@ func (s *TaskDetails) UnmarshalJSONObject(d *gojay.Decoder, k string) error {
 	return s.TaskMeta.UnmarshalJSONObject(d, k)
 }
 
+// NKeys implements the gojay UnmarshalerJSONObject interface.
 func (s *TaskDetails) NKeys() int {
 	return 7 + s.TaskMeta.NKeys()
 }
 
+// IsNil implements the gojay MarshalerJSONObject interface.
 func (s TaskDetails) IsNil() bool {
 	return false
 }
