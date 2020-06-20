@@ -1,5 +1,7 @@
 = Softask API Types (for Golang)
 
+image:https://goreportcard.com/badge/github.com/softask-app/lib-go-api-types["Go Report Card", link=https://goreportcard.com/report/github.com/softask-app/lib-go-api-types]
+
 Concrete type definitions for the I/O types used by the Softask REST API.
 
 All types implement the https://github.com/francoispqt/gojay[gojay] JSON
