@@ -37,12 +37,10 @@ func (d *DeviceDetails) MarshalJSONObject(e *gojay.Encoder) {
 	e.Uint64Key(JsKeyId, d.Id)
 	e.StringKey(JsKeyDeviceId, d.DeviceId.String())
 	e.StringKey(JsKeyDeviceName, d.DeviceName)
-	if len(d.DisplayName) > 0 {
-		e.StringKey(JsKeyDisplayName, d.DisplayName)
-	}
+	e.StringKeyOmitEmpty(JsKeyDisplayName, d.DisplayName)
 	e.TimeKey(JsKeyLastLogin, &d.LastLogin, time.RFC3339Nano)
 	if d.Trusted != nil {
-		e.ObjectKey(JsKeyTrusted, d.Trusted)
+		e.ObjectKeyOmitEmpty(JsKeyTrusted, d.Trusted)
 	}
 }
 
