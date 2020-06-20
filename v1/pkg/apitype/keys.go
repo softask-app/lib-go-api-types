@@ -1,0 +1,27 @@
+package apitype
+
+const (
+	JsKeyAssignees   = "assignees"
+	JsKeyCreated     = "created"
+	JsKeyCreator     = "creator"
+	JsKeyDeleted     = "deleted"
+	JsKeyDescription = "description"
+	JsKeyDeviceId    = "deviceId"
+	JsKeyDeviceName  = "deviceName"
+	JsKeyDisplayName = "displayName"
+	JsKeyEmail       = "email"
+	JsKeyId          = "id"
+	JsKeyLastLogin   = "lastLogin"
+	JsKeyName        = "name"
+	JsKeyPosition    = "position"
+	JsKeyProviders   = "providers"
+	JsKeySince       = "since"
+	JsKeySteps       = "steps"
+	JsKeySupports    = "supports"
+	JsKeyTask        = "task"
+	JsKeyTaskId      = "taskId"
+	JsKeyToken       = "token"
+	JsKeyTrusted     = "trusted"
+	JsKeyUpdated     = "updated"
+	JsKeyUserId      = "userId"
+)

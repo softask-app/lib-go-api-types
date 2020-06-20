@@ -1,4 +1,4 @@
-package apiuser
+package apitype
 
 import (
 	"github.com/francoispqt/gojay"

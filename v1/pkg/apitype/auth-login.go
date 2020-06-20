@@ -1,4 +1,4 @@
-package apiauth
+package apitype
 
 import (
 	"github.com/francoispqt/gojay"

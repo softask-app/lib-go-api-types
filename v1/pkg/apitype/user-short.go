@@ -1,13 +1,9 @@
-package apiuser
+package apitype
 
 import (
 	"errors"
-	"github.com/francoispqt/gojay"
-)
 
-const (
-	JsKeyUserId          = "id"
-	JsKeyUserDisplayName = "displayName"
+	"github.com/francoispqt/gojay"
 )
 
 type UserMeta struct {
@@ -17,13 +13,13 @@ type UserMeta struct {
 
 func (u *UserMeta) UnmarshalJSONObject(d *gojay.Decoder, s string) error {
 	switch s {
-	case JsKeyUserId:
+	case JsKeyId:
 		return d.Uint64(&u.Id)
-	case JsKeyUserDisplayName:
+	case JsKeyDisplayName:
 		return d.String(&u.DisplayName)
 	}
 
-	return errors.New("unrecognized json key " + s)
+	return errBadKey(s)
 }
 
 func (u *UserMeta) NKeys() int {
@@ -31,11 +27,10 @@ func (u *UserMeta) NKeys() int {
 }
 
 func (u UserMeta) MarshalJSONObject(e *gojay.Encoder) {
-	e.Uint64Key(JsKeyUserId, u.Id)
-	e.StringKey(JsKeyUserDisplayName, u.DisplayName)
+	e.Uint64Key(JsKeyId, u.Id)
+	e.StringKey(JsKeyDisplayName, u.DisplayName)
 }
 
 func (u UserMeta) IsNil() bool {
 	return false
 }
-

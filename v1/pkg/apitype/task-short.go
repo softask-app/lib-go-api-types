@@ -1,4 +1,4 @@
-package apitask
+package apitype
 
 import "github.com/francoispqt/gojay"
 
@@ -12,10 +12,11 @@ func (s *TaskMeta) UnmarshalJSONObject(d *gojay.Decoder, k string) error {
 	switch k {
 	case JsKeyTaskId:
 		return d.Uint64(&s.Id)
-	case JsKeyTaskName:
+	case JsKeyName:
 		return d.String(&s.Name)
 	}
-	return nil
+
+	return errBadKey(k)
 }
 
 func (s *TaskMeta) NKeys() int {
@@ -24,7 +25,7 @@ func (s *TaskMeta) NKeys() int {
 
 func (s *TaskMeta) MarshalJSONObject(enc *gojay.Encoder) {
 	enc.AddUint64Key(JsKeyTaskId, s.Id)
-	enc.AddStringKey(JsKeyTaskName, s.Name)
+	enc.AddStringKey(JsKeyName, s.Name)
 }
 
 func (s TaskMeta) IsNil() bool {

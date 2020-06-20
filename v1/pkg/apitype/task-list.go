@@ -1,11 +1,6 @@
-package apitask
+package apitype
 
 import "github.com/francoispqt/gojay"
-
-const (
-	JsKeyTaskId   = "id"
-	JsKeyTaskName = "name"
-)
 
 type TaskList []TaskMeta
 

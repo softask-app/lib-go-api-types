@@ -1,4 +1,4 @@
-package apiauth
+package apitype
 
 import (
 	"github.com/francoispqt/gojay"
@@ -34,4 +34,3 @@ func (a AuthResponse) IsNil() bool {
 func (a *AuthResponse) NKeys() int {
 	return 1
 }
-

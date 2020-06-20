@@ -1,4 +1,4 @@
-package apitask
+package apitype
 
 import (
 	"github.com/francoispqt/gojay"
@@ -26,5 +26,3 @@ func (s StepList) MarshalJSONArray(e *gojay.Encoder) {
 func (s StepList) IsNil() bool {
 	return false
 }
-
-

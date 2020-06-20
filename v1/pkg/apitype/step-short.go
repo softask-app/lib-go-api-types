@@ -1,15 +1,7 @@
-package apitask
+package apitype
 
 import (
-	"errors"
 	"github.com/francoispqt/gojay"
-)
-
-const (
-	JsKeyStepId          = "id"
-	JsKeyStepTaskId      = "taskId"
-	JsKeyStepDescription = "description"
-	JsKeyStepPosition    = "position"
 )
 
 type StepMeta struct {
@@ -21,17 +13,17 @@ type StepMeta struct {
 
 func (s *StepMeta) UnmarshalJSONObject(d *gojay.Decoder, k string) error {
 	switch k {
-	case JsKeyStepId:
+	case JsKeyId:
 		return d.Uint64(&s.Id)
-	case JsKeyStepTaskId:
+	case JsKeyTaskId:
 		return d.Uint64(&s.TaskId)
-	case JsKeyStepDescription:
+	case JsKeyDescription:
 		return d.String(&s.Description)
-	case JsKeyStepPosition:
+	case JsKeyPosition:
 		return d.Uint16(&s.Position)
 	}
 
-	return errors.New("unrecognized json key " + k)
+	return errBadKey(k)
 }
 
 func (s *StepMeta) NKeys() int {
@@ -39,10 +31,10 @@ func (s *StepMeta) NKeys() int {
 }
 
 func (s StepMeta) MarshalJSONObject(e *gojay.Encoder) {
-	e.Uint64Key(JsKeyStepId, s.Id)
-	e.Uint64Key(JsKeyStepTaskId, s.TaskId)
-	e.StringKey(JsKeyStepDescription, s.Description)
-	e.Uint16Key(JsKeyStepPosition, s.Position)
+	e.Uint64Key(JsKeyId, s.Id)
+	e.Uint64Key(JsKeyTaskId, s.TaskId)
+	e.StringKey(JsKeyDescription, s.Description)
+	e.Uint16Key(JsKeyPosition, s.Position)
 }
 
 func (s StepMeta) IsNil() bool {
