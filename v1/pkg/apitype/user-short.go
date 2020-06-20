@@ -6,7 +6,11 @@ import (
 
 // UserMeta defines a base representation of a user record.
 type UserMeta struct {
-	Id          uint64
+
+	// Database ID for the user record.
+	Id uint64
+
+	// User display name / nickname.
 	DisplayName string
 }
 
