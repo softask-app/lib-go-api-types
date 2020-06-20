@@ -13,6 +13,7 @@ const (
 	JsKeyId          = "id"
 	JsKeyLastLogin   = "lastLogin"
 	JsKeyName        = "name"
+	JsKeyPassword    = "password"
 	JsKeyPosition    = "position"
 	JsKeyProviders   = "providers"
 	JsKeySince       = "since"

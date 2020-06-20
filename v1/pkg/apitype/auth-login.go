@@ -4,10 +4,8 @@ import (
 	"github.com/francoispqt/gojay"
 )
 
-const (
-	JsKeyPassword = "password"
-)
-
+// LoginRequest defines the body of an authentication request to the HTTP
+// service using user credentials.
 type LoginRequest struct {
 	Email    string
 	Password string

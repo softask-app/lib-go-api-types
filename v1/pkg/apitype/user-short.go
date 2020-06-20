@@ -4,6 +4,7 @@ import (
 	"github.com/francoispqt/gojay"
 )
 
+// UserMeta defines a base representation of a user record.
 type UserMeta struct {
 	Id          uint64
 	DisplayName string

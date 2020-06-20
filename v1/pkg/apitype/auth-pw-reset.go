@@ -5,9 +5,17 @@ import (
 	"github.com/softask-app/lib-go-token/v1/pkg/apitoken"
 )
 
+// PasswordResetRequest defines the body of a request to the HTTP service to
+// update a user's password to the given value.
 type PasswordResetRequest struct {
-	UserId   uint64
-	Token    apitoken.Token256
+
+	// Database ID of the user record to update.
+	UserId uint64
+
+	// Password reset token (will have been sent to the user's email)
+	Token apitoken.Token256
+
+	// New password value
 	Password string
 }
 
@@ -18,6 +26,7 @@ func (p *PasswordResetRequest) MarshalJSONObject(enc *gojay.Encoder) {
 	enc.StringKey(JsKeyPassword, p.Password)
 }
 
+// UnmarshalJSONObject implements the gojay UnmarshalerJSONObject interface.
 func (p *PasswordResetRequest) UnmarshalJSONObject(d *gojay.Decoder, s string) error {
 	switch s {
 	case JsKeyUserId:
@@ -31,10 +40,12 @@ func (p *PasswordResetRequest) UnmarshalJSONObject(d *gojay.Decoder, s string) e
 	return nil
 }
 
+// IsNil implements the gojay MarshalerJSONObject interface.
 func (p *PasswordResetRequest) IsNil() bool {
 	return false
 }
 
+// NKeys implements the gojay UnmarshalerJSONObject interface.
 func (p *PasswordResetRequest) NKeys() int {
 	return 3
 }
