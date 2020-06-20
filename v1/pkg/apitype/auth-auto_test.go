@@ -1,6 +1,7 @@
 package apitype_test
 
 import (
+	"reflect"
 	"testing"
 
 	"github.com/francoispqt/gojay"
@@ -37,5 +38,14 @@ func TestAutoAuth_UnmarshalJSONObject(t *testing.T) {
 		So(test.UserId, ShouldEqual, 1234)
 		So(test.DeviceId, ShouldResemble, k1)
 		So(test.Token, ShouldResemble, k2)
+	})
+}
+
+func TestAutoAuth_NKeys(t *testing.T) {
+	Convey("AutoAuth.NKeys", t, func() {
+		tmp := apitype.AutoAuth{}
+		kind := reflect.TypeOf(tmp)
+
+		So(tmp.NKeys(), ShouldEqual, kind.NumField())
 	})
 }
