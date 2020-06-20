@@ -5,10 +5,6 @@ import (
 	"github.com/softask-app/lib-go-token/v1/pkg/apitoken"
 )
 
-const (
-	JsApiKey = "apiKey"
-)
-
 // AuthResponse defines the response body for a successful authentication
 // request.
 type AuthResponse struct {
@@ -17,12 +13,12 @@ type AuthResponse struct {
 
 // MarshalJSONObject implements the gojay MarshalerJSONObject interface.
 func (a AuthResponse) MarshalJSONObject(enc *gojay.Encoder) {
-	enc.StringKey(JsApiKey, a.ApiKey.String())
+	enc.StringKey(JsKeyApiKey, a.ApiKey.String())
 }
 
 // UnmarshalJSONObject implements the gojay UnmarshalerJSONObject interface.
 func (a *AuthResponse) UnmarshalJSONObject(dec *gojay.Decoder, s string) error {
-	if s == JsApiKey {
+	if s == JsKeyApiKey {
 		return a.ApiKey.UnmarshalJSONArray(dec)
 	}
 

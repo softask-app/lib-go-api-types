@@ -50,17 +50,20 @@ func (p *PasswordResetRequest) NKeys() int {
 	return 3
 }
 
-type RequestPasswordRequest struct {
+// RequestPasswordResetRequest defines the body of a request to the HTTP server
+// to send a password reset to the given email (provided that email is attached
+// to a known user).
+type RequestPasswordResetRequest struct {
 	Email string
 }
 
 // MarshalJSONObject implements the gojay MarshalerJSONObject interface.
-func (r *RequestPasswordRequest) MarshalJSONObject(enc *gojay.Encoder) {
+func (r *RequestPasswordResetRequest) MarshalJSONObject(enc *gojay.Encoder) {
 	enc.StringKey(JsKeyEmail, r.Email)
 }
 
 // UnmarshalJSONObject implements the gojay UnmarshalerJSONObject interface.
-func (r *RequestPasswordRequest) UnmarshalJSONObject(d *gojay.Decoder, s string) error {
+func (r *RequestPasswordResetRequest) UnmarshalJSONObject(d *gojay.Decoder, s string) error {
 	if s == JsKeyEmail {
 		return d.String(&r.Email)
 	}
@@ -69,11 +72,11 @@ func (r *RequestPasswordRequest) UnmarshalJSONObject(d *gojay.Decoder, s string)
 }
 
 // NKeys implements the gojay UnmarshalerJSONObject interface.
-func (r *RequestPasswordRequest) NKeys() int {
+func (r *RequestPasswordResetRequest) NKeys() int {
 	return 1
 }
 
 // IsNil implements the gojay MarshalerJSONObject interface.
-func (r *RequestPasswordRequest) IsNil() bool {
+func (r *RequestPasswordResetRequest) IsNil() bool {
 	return false
 }

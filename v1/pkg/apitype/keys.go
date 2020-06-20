@@ -1,6 +1,8 @@
 package apitype
 
+// JSON object key name constants.
 const (
+	JsKeyApiKey      = "apiKey"
 	JsKeyAssignees   = "assignees"
 	JsKeyCreated     = "created"
 	JsKeyCreator     = "creator"

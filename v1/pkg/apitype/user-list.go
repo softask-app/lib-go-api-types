@@ -4,6 +4,7 @@ import (
 	"github.com/francoispqt/gojay"
 )
 
+// UserList is a list of user metadata for 0 or more users.
 type UserList []UserMeta
 
 func (u UserList) MarshalJSONArray(e *gojay.Encoder) {

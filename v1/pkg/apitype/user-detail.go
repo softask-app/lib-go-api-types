@@ -1,10 +1,12 @@
 package apitype
 
 import (
-	"github.com/francoispqt/gojay"
 	"time"
+
+	"github.com/francoispqt/gojay"
 )
 
+// UserDetail defines the info available for a specific user record.
 type UserDetail struct {
 	UserMeta
 

@@ -10,13 +10,33 @@ import (
 type TaskDetails struct {
 	TaskMeta
 
+	// User provided description of the task.
 	Description string
-	Creator     UserMeta
-	Assignees   UserList
-	Steps       StepList
-	Created     time.Time
-	Updated     time.Time
-	Deleted     *time.Time
+
+	// User metadata for the user that created the task.
+	Creator UserMeta
+
+	// User metadata for the users to whom this task is assigned.
+	//
+	// This value will only be populated with users that the current user is
+	// marked as a provider for.
+	//
+	// If the current user is not a provider, the task has no assignees, or the
+	// task is self assigned, this field will be omitted by the server.
+	Assignees UserList
+
+	// An optional list of steps that make up the current task.
+	Steps StepList
+
+	// Timestamp of when this task was created.
+	Created time.Time
+
+	// Timestamp of when this task was last updated.
+	Updated time.Time
+
+	// Optional timestamp of when this task was deleted (only present if the task
+	// actually has been deleted).
+	Deleted *time.Time
 }
 
 // MarshalJSONObject implements the gojay MarshalerJSONObject interface.

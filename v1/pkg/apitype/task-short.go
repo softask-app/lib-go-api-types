@@ -4,7 +4,11 @@ import "github.com/francoispqt/gojay"
 
 // TaskMeta represents a minimal representation of a task.
 type TaskMeta struct {
-	Id   uint64
+
+	// Database ID for the task record.
+	Id uint64
+
+	// User provided name for the task.
 	Name string
 }
 
