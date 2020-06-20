@@ -15,6 +15,7 @@ func (u UserMeta) MarshalJSONObject(e *gojay.Encoder) {
 	e.StringKey(JsKeyDisplayName, u.DisplayName)
 }
 
+// UnmarshalJSONObject implements the gojay UnmarshalerJSONObject interface.
 func (u *UserMeta) UnmarshalJSONObject(d *gojay.Decoder, s string) error {
 	switch s {
 	case JsKeyId:

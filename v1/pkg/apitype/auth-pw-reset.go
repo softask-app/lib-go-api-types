@@ -48,9 +48,10 @@ func (r *RequestPasswordRequest) MarshalJSONObject(enc *gojay.Encoder) {
 	enc.StringKey(JsKeyEmail, r.Email)
 }
 
-func (r *RequestPasswordRequest) UnmarshalJSONObject(d *gojay.Decoder, s string) (err error) {
+// UnmarshalJSONObject implements the gojay UnmarshalerJSONObject interface.
+func (r *RequestPasswordRequest) UnmarshalJSONObject(d *gojay.Decoder, s string) error {
 	if s == JsKeyEmail {
-		err = d.String(&r.Email)
+		return d.String(&r.Email)
 	}
 
 	return nil

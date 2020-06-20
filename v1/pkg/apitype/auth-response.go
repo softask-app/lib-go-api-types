@@ -20,6 +20,7 @@ func (a AuthResponse) MarshalJSONObject(enc *gojay.Encoder) {
 	enc.StringKey(JsApiKey, a.ApiKey.String())
 }
 
+// UnmarshalJSONObject implements the gojay UnmarshalerJSONObject interface.
 func (a *AuthResponse) UnmarshalJSONObject(dec *gojay.Decoder, s string) error {
 	if s == JsApiKey {
 		return a.ApiKey.UnmarshalJSONArray(dec)

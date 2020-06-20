@@ -82,6 +82,7 @@ func (d *DeviceTrust) MarshalJSONObject(e *gojay.Encoder) {
 	e.TimeKey(JsKeySince, &d.Since, time.RFC3339Nano)
 }
 
+// UnmarshalJSONObject implements the gojay UnmarshalerJSONObject interface.
 func (d *DeviceTrust) UnmarshalJSONObject(e *gojay.Decoder, s string) error {
 	if s != JsKeySince {
 		return errBadKey(s)

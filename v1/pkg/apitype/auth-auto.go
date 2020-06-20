@@ -33,6 +33,7 @@ func (a *AutoAuth) MarshalJSONObject(e *gojay.Encoder) {
 	e.ArrayKey(JsKeyToken, a.Token)
 }
 
+// UnmarshalJSONObject implements the gojay UnmarshalerJSONObject interface.
 func (a *AutoAuth) UnmarshalJSONObject(dec *gojay.Decoder, s string) (err error) {
 	switch s {
 	case JsKeyUserId:

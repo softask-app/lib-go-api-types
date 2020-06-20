@@ -35,6 +35,7 @@ func (s *TaskDetails) MarshalJSONObject(enc *gojay.Encoder) {
 	}
 }
 
+// UnmarshalJSONObject implements the gojay UnmarshalerJSONObject interface.
 func (s *TaskDetails) UnmarshalJSONObject(d *gojay.Decoder, k string) error {
 	switch k {
 	case JsKeyDescription:

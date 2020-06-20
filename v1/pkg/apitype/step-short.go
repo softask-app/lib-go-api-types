@@ -19,6 +19,7 @@ func (s StepMeta) MarshalJSONObject(e *gojay.Encoder) {
 	e.Uint16Key(JsKeyPosition, s.Position)
 }
 
+// UnmarshalJSONObject implements the gojay UnmarshalerJSONObject interface.
 func (s *StepMeta) UnmarshalJSONObject(d *gojay.Decoder, k string) error {
 	switch k {
 	case JsKeyId:

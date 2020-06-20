@@ -23,6 +23,7 @@ func (u UserDetail) MarshalJSONObject(e *gojay.Encoder) {
 	e.TimeKey(JsKeyCreated, &u.Created, time.RFC3339Nano)
 }
 
+// UnmarshalJSONObject implements the gojay UnmarshalerJSONObject interface.
 func (u *UserDetail) UnmarshalJSONObject(d *gojay.Decoder, s string) error {
 	switch s {
 	case JsKeyEmail:

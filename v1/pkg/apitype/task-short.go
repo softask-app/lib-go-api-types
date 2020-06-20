@@ -14,6 +14,7 @@ func (s *TaskMeta) MarshalJSONObject(enc *gojay.Encoder) {
 	enc.AddStringKey(JsKeyName, s.Name)
 }
 
+// UnmarshalJSONObject implements the gojay UnmarshalerJSONObject interface.
 func (s *TaskMeta) UnmarshalJSONObject(d *gojay.Decoder, k string) error {
 	switch k {
 	case JsKeyTaskId:

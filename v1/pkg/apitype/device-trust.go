@@ -14,6 +14,7 @@ func (t *DeviceTrustResponse) MarshalJSONObject(e *gojay.Encoder) {
 	e.AddArrayKey(JsKeyToken, t.Token)
 }
 
+// UnmarshalJSONObject implements the gojay UnmarshalerJSONObject interface.
 func (t *DeviceTrustResponse) UnmarshalJSONObject(d *gojay.Decoder, s string) error {
 	if s != JsKeyToken {
 		return errBadKey(s)
