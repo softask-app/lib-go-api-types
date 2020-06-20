@@ -1,7 +1,6 @@
 package apitype
 
 import (
-	"errors"
 	"github.com/francoispqt/gojay"
 	"github.com/softask-app/lib-go-token/v1/pkg/apitoken"
 )
@@ -29,22 +28,32 @@ type AutoAuth struct {
 // MarshalJSONObject implements the gojay MarshalerJSONObject interface.
 func (a *AutoAuth) MarshalJSONObject(e *gojay.Encoder) {
 	e.Uint64Key(JsKeyUserId, a.UserId)
-	e.ArrayKey(JsKeyDeviceId, a.DeviceId)
-	e.ArrayKey(JsKeyToken, a.Token)
+	e.StringKey(JsKeyDeviceId, a.DeviceId.String())
+	e.StringKey(JsKeyToken, a.Token.String())
 }
 
 // UnmarshalJSONObject implements the gojay UnmarshalerJSONObject interface.
-func (a *AutoAuth) UnmarshalJSONObject(dec *gojay.Decoder, s string) (err error) {
+func (a *AutoAuth) UnmarshalJSONObject(dec *gojay.Decoder, s string) error {
 	switch s {
 	case JsKeyUserId:
-		err = dec.Uint64(&a.UserId)
+		return dec.Uint64(&a.UserId)
 	case JsKeyDeviceId:
-		err = a.DeviceId.UnmarshalJSONArray(dec)
+		var tmp string
+		if err := dec.String(&tmp); err != nil {
+			return err
+		}
+
+		return a.DeviceId.FromString(tmp)
 	case JsKeyToken:
-		err = a.Token.UnmarshalJSONArray(dec)
+		var tmp string
+		if err := dec.String(&tmp); err != nil {
+			return err
+		}
+
+		return a.Token.FromString(tmp)
 	}
 
-	return errors.New("unrecognized ")
+	return errBadKey(s)
 }
 
 // IsNil implements the gojay MarshalerJSONObject interface.

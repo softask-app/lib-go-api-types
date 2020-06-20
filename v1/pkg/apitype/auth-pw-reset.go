@@ -22,7 +22,7 @@ type PasswordResetRequest struct {
 // MarshalJSONObject implements the gojay MarshalerJSONObject interface.
 func (p *PasswordResetRequest) MarshalJSONObject(enc *gojay.Encoder) {
 	enc.Uint64Key(JsKeyUserId, p.UserId)
-	enc.ArrayKey(JsKeyToken, p.Token)
+	enc.StringKey(JsKeyToken, p.Token.String())
 	enc.StringKey(JsKeyPassword, p.Password)
 }
 
@@ -32,7 +32,12 @@ func (p *PasswordResetRequest) UnmarshalJSONObject(d *gojay.Decoder, s string) e
 	case JsKeyUserId:
 		return d.Uint64(&p.UserId)
 	case JsKeyToken:
-		return p.Token.UnmarshalJSONArray(d)
+		var tmp string
+		if err := d.String(&tmp); err != nil {
+			return err
+		}
+
+		return p.Token.FromString(tmp)
 	case JsKeyPassword:
 		return d.String(&p.Password)
 	}

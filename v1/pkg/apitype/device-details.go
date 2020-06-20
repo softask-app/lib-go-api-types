@@ -51,7 +51,12 @@ func (d *DeviceDetails) UnmarshalJSONObject(e *gojay.Decoder, k string) error {
 	case JsKeyId:
 		return e.Uint64(&d.Id)
 	case JsKeyDeviceId:
-		return d.DeviceId.UnmarshalJSONArray(e)
+		var tmp string
+		if err := e.String(&tmp); err != nil {
+			return err
+		}
+
+		return d.DeviceId.FromString(tmp)
 	case JsKeyDeviceName:
 		return e.String(&d.DeviceName)
 	case JsKeyDisplayName:

@@ -11,7 +11,7 @@ type DeviceTrustResponse struct {
 
 // MarshalJSONObject implements the gojay MarshalerJSONObject interface.
 func (t *DeviceTrustResponse) MarshalJSONObject(e *gojay.Encoder) {
-	e.AddArrayKey(JsKeyToken, t.Token)
+	e.StringKey(JsKeyToken, t.Token.String())
 }
 
 // UnmarshalJSONObject implements the gojay UnmarshalerJSONObject interface.
@@ -20,7 +20,12 @@ func (t *DeviceTrustResponse) UnmarshalJSONObject(d *gojay.Decoder, s string) er
 		return errBadKey(s)
 	}
 
-	return d.Array(t.Token)
+	var tmp string
+	if err := d.String(&tmp); err != nil {
+		return err
+	}
+
+	return t.Token.FromString(tmp)
 }
 
 // NKeys implements the gojay UnmarshalerJSONObject interface.
