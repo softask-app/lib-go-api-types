@@ -2,6 +2,7 @@ package apitype
 
 import (
 	"github.com/francoispqt/gojay"
+	"github.com/softask-app/lib-go-password/v1/pkg/passwd"
 	"github.com/softask-app/lib-go-token/v1/pkg/apitoken"
 )
 
@@ -16,14 +17,14 @@ type PasswordResetRequest struct {
 	Token apitoken.Token256
 
 	// New password value
-	Password string
+	Password passwd.Password
 }
 
 // MarshalJSONObject implements the gojay MarshalerJSONObject interface.
 func (p *PasswordResetRequest) MarshalJSONObject(enc *gojay.Encoder) {
 	enc.Uint64Key(JsKeyUserId, p.UserId)
 	enc.StringKey(JsKeyToken, p.Token.String())
-	enc.StringKey(JsKeyPassword, p.Password)
+	enc.StringKey(JsKeyPassword, string(p.Password))
 }
 
 // UnmarshalJSONObject implements the gojay UnmarshalerJSONObject interface.
@@ -39,7 +40,12 @@ func (p *PasswordResetRequest) UnmarshalJSONObject(d *gojay.Decoder, s string) e
 
 		return p.Token.FromString(tmp)
 	case JsKeyPassword:
-		return d.String(&p.Password)
+		var tmp string
+		if err := d.String(&tmp); err != nil {
+			return err
+		}
+
+		p.Password = passwd.Password(tmp)
 	}
 
 	return nil
